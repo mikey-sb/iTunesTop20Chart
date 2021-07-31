@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactAudioPlayer from 'react-audio-player';
 
-const TuneInfo = ({tuneInfo}) => {
+const TuneInfo = ({tuneInfo, darkState}) => {
 
     const TuneEntry = tuneInfo.feed.entry.map((tune, index) => {
         return(
-            <>
-                <div class="p-6 max-w-md mx-auto bg-white dark:bg-black rounded-xl shadow-md  mb-4 mt-4">
+            <div class={darkState}>
+                <div class="p-6 max-w-md mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-md  mb-4 mt-4">
                 <div class="flex items-center space-x-4">
                 <div class="flex-shrink-0">
                     <img src={tune["im:image"][2].label} alt="Song Artwork"/>
@@ -16,27 +16,14 @@ const TuneInfo = ({tuneInfo}) => {
                         <p class="text-gray-500">{tune["im:artist"].label}</p>
                         <p class="text-gray-400">{tune["im:collection"]["im:name"].label}</p>
                     </div> 
-                </div>
-                   
+                </div>               
                 <div class="mt-4">
-                    <ReactAudioPlayer
-                    src={tune.link[1].attributes.href}
-                    autoPlay={false}
-                    controls={true}
-                    />
+                    <ReactAudioPlayer src={tune.link[1].attributes.href} autoPlay={false} controls={true}/>
                     </div>  
-
-                </div>
-                    
-            
-        
-    
-            </>
-
-            
+                </div>  
+            </div> 
         )
     })
-
     return (
         <>
             {TuneEntry}
